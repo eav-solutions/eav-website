@@ -73,8 +73,8 @@ section + section { border-top: 1px solid var(--rule); }
 }
 
 /* the home page picture: each app's icon, plus an open space for the next one */
-.icon-grid { display: grid; grid-template-columns: repeat(var(--cols, 2), 1fr); gap: 18px; padding: 22px; background: var(--sheet); border: 1px solid var(--rule); border-radius: 26px; box-shadow: var(--shadow); }
-.icon-grid img, .icon-grid .next { width: 100%; aspect-ratio: 1; border-radius: 22.5%; }
+.icon-grid { display: grid; grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr)); gap: 18px; padding: 22px; background: var(--sheet); border: 1px solid var(--rule); border-radius: 26px; box-shadow: var(--shadow); }
+.icon-grid img, .icon-grid .next { width: 100%; height: auto; aspect-ratio: 1; box-sizing: border-box; border-radius: 22.5%; }
 .icon-grid img { box-shadow: 0 1px 0 rgba(0,0,0,.06), 0 6px 14px -8px rgba(0,0,0,.4); }
 .icon-grid .next { display: grid; place-items: center; border: 2px dashed var(--rule); color: var(--muted); font: 600 2.4rem/1 var(--display); }
 
@@ -92,7 +92,7 @@ section + section { border-top: 1px solid var(--rule); }
 .card h3 { margin: 4px 0 0; }
 .card p { margin: 0; color: var(--muted); }
 .card .more { margin-top: auto; padding-top: 6px; font-weight: 600; }
-.tag { display: inline-block; font: 500 .74rem/1 var(--mono); letter-spacing: .04em; padding: 6px 9px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); align-self: flex-start; }
+.tag { display: inline-block; font: 500 .74rem/1.4 var(--mono); letter-spacing: .04em; padding: 4px 10px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); align-self: flex-start; }
 
 /* two-column feature rows */
 .split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
