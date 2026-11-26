@@ -36,9 +36,16 @@ registered office and where the company is registered, exactly as on Companies H
 these, which is what the footer is for. Update them there if they change.
 
 ## Hosting
-Any static host works. Free options that take a custom domain and HTTPS: Azure Static Web Apps, GitHub Pages,
-Cloudflare Pages or Netlify. Set the build command to `node build.mjs` and the output folder to `public`, or run the
-build yourself and upload `public/`. `404.html` is picked up automatically by most hosts.
+GitHub Pages, at https://eav-sol.com. Every push to `master` runs `.github/workflows/pages.yml`, which builds the
+site and publishes `public/`. The repo's Settings → Pages has Source set to "GitHub Actions" and the custom domain
+eav-sol.com, with HTTPS enforced.
+
+DNS is at GoDaddy:
+- eav-sol.com: four A records for `@` (185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153) and a
+  CNAME `www` → `<github organisation>.github.io`. The domain is verified on the GitHub organisation (a TXT record
+  `_github-pages-challenge-…`), so no one else can claim it for their Pages site.
+- The MX, SPF, DKIM and google-site-verification records are for Google Workspace mail: leave them alone.
+- eav-sol.co.uk: GoDaddy forwarding (permanent, 301) to https://eav-sol.com.
 
 ## For Apple's organisation enrolment
 - The site must be live on a domain the company owns, and the Apple ID you enrol with should use an email address on
