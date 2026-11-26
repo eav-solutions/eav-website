@@ -30,14 +30,10 @@ buttons appear. To take an app off the site, delete its file.
 Building blocks: four rounded tiles, with the top-right one tilted as it's lifted into place. It's drawn in `logo()` in
 `build.mjs` and used for both the header and `favicon.svg`.
 
-## Before it goes live: fill in the placeholders
-These are all in `content/site.mjs`:
-- `[contact email]`: ideally on the website's own domain (Apple checks this).
-- `[company number]` and `[registered office address]`: exactly as on Companies House.
-- `[England and Wales]`: or Scotland / Northern Ireland, wherever the company is registered.
-
-UK company websites must show the registered name, number, registered office and where it's registered,
-which is what the footer is for.
+## Company details
+`content/site.mjs` holds the contact email (on the site's own domain, which Apple checks), the company number,
+registered office and where the company is registered, exactly as on Companies House. UK company websites must show
+these, which is what the footer is for. Update them there if they change.
 
 ## Hosting
 Any static host works. Free options that take a custom domain and HTTPS: Azure Static Web Apps, GitHub Pages,
@@ -56,3 +52,12 @@ build yourself and upload `public/`. `404.html` is picked up automatically by mo
 Each app's privacy section describes what it does with data. Update it, and `privacyUpdated` in `content/site.mjs`,
 before releasing a version that changes that: for example Twenty Paws AI (which will send answers to Claude), adding
 analytics, or anything that leaves the phone.
+
+## Logo files
+`content/logo.mjs` draws the logo. `node scripts/make-brand.mjs` (needs Google Chrome) redraws the PNGs; run it after
+changing the logo, then `node build.mjs`. The files are in `static/assets/brand/` and published at `/assets/brand/`:
+- `eav-logo-64/128/256/512.png` and `eav-logo.svg`: the square logo, transparent outside its rounded corners.
+- `eav-lockup.png`: the logo with "EAV Solutions" in dark text. `eav-lockup-light.png` has white text for dark
+  backgrounds, and `eav-lockup-on-white.png` sits on a white panel so it reads in any mail app's dark mode.
+  They're drawn at twice size: show them at half their width (about 230px) so they're sharp.
+- `static/apple-touch-icon.png`: the icon an iPhone uses when the site is saved to the home screen.

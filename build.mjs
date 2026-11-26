@@ -7,6 +7,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const OUT = join(ROOT, 'public');
+import { logo, logoSVG } from './content/logo.mjs';
 const site = (await import(pathToFileURL(join(ROOT, 'content/site.mjs')))).default;
 
 const appDir = join(ROOT, 'content/apps');
@@ -23,16 +24,6 @@ const EMAIL = site.email;
 const YEAR = new Date().getFullYear();
 
 // ---------- the logo ----------
-// Building blocks: four rounded tiles, with the top-right one being lifted into place.
-function logo(bg, ink) {
-  return `<rect width="32" height="32" rx="7.5" fill="${bg}"/>`
-    + `<g fill="${ink}">`
-    + `<rect x="6.5" y="16.5" width="9" height="9" rx="2.2"/>`
-    + `<rect x="16.5" y="16.5" width="9" height="9" rx="2.2"/>`
-    + `<rect x="6.5" y="6.5" width="9" height="9" rx="2.2"/>`
-    + `<rect x="17.2" y="5.2" width="9" height="9" rx="2.2" transform="rotate(14 21.7 9.7)" opacity=".75"/>`
-    + `</g>`;
-}
 const mark = `<svg viewBox="0 0 32 32" aria-hidden="true">${logo('var(--accent)', 'var(--accent-ink)')}</svg>`;
 
 // ---------- shared bits ----------
@@ -55,6 +46,8 @@ function page({ path, title, description, nav, body }) {
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="icon" href="${up}favicon.svg" type="image/svg+xml">
+<link rel="icon" href="${up}assets/brand/eav-logo-64.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="${up}apple-touch-icon.png">
 <link rel="stylesheet" href="${up}assets/fonts.css">
 <link rel="stylesheet" href="${up}assets/site.css">
 </head>
@@ -111,7 +104,7 @@ ${shown.map(a => `  <img src="assets/${a.icon}" alt="" width="120" height="120">
 rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 cpSync(join(ROOT, 'static'), OUT, { recursive: true });
-writeFileSync(join(OUT, 'favicon.svg'), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">${logo('#2347C5', '#FFFFFF')}</svg>\n`);
+writeFileSync(join(OUT, 'favicon.svg'), logoSVG());
 
 // ---------- home ----------
 const soon = apps.filter(a => a.status !== 'live');
